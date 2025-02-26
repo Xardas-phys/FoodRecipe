@@ -73,11 +73,16 @@ import {
   
         {/* Recipe Details */}
         <View style={styles.contentContainer} testID="contentContainer">
-        <Text style={styles.recipeTitle}>{recipe.title}</Text>
-  <View style={styles.sectionContainer}>
-    <Text style={styles.sectionTitle}>Content</Text>
-    <Text style={styles.contentText}>{recipe.description}</Text>
-  </View>
+          <Text style={styles.recipeTitle}>{recipe.title}</Text>
+          <View style={styles.sectionContainer}>
+            <Text style={styles.sectionTitle}>Ingridients</Text>
+            <Text style={styles.contentText}>{recipe.ingridients}</Text>
+            
+          </View>
+          <View style={styles.sectionContainer}>
+            <Text style={styles.sectionTitle}>Instructions</Text>
+            <Text style={styles.contentText}>{recipe.instructions}</Text>
+          </View>
         </View>
       </ScrollView>
     );

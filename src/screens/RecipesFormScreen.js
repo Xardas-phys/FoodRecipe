@@ -7,13 +7,16 @@ export default function RecipesFormScreen({ route, navigation }) {
   const { recipeToEdit, recipeIndex, onrecipeEdited } = route.params || {};
   const [title, setTitle] = useState(recipeToEdit ? recipeToEdit.title : "");
   const [image, setImage] = useState(recipeToEdit ? recipeToEdit.image : "");
-  const [description, setDescription] = useState(
-    recipeToEdit ? recipeToEdit.description : ""
+  const [instructions, setInstructions] = useState(
+    recipeToEdit ? recipeToEdit.instructions : ""
+  );
+  const [ingridients, setIngridients] = useState(
+    recipeToEdit ? recipeToEdit.ingridients : ""
   );
 
   const saverecipe = async () => {
     
-    const newRecipe = { title, image, description };
+    const newRecipe = { title, image, instructions, ingridients };
     try {
       const existingRecipes = await AsyncStorage.getItem("customrecipes");
       const recipes = existingRecipes ? JSON.parse(existingRecipes) : [];
@@ -51,18 +54,27 @@ export default function RecipesFormScreen({ route, navigation }) {
         style={styles.input}
       />
       {image ? (
-        <Image source={{ uri: image }} style={styles.image} />
+        <Image source={{ uri: image }} style={[styles.image, {height: hp(15)}]} />
       ) : (
         <Text style={styles.imagePlaceholder}>Upload Image URL</Text>
       )}
       <TextInput
-        placeholder="Description"
-        value={description}
-        onChangeText={setDescription}
+        placeholder="Ingredients"
+        value={ingridients}
+        onChangeText={setIngridients}
         multiline={true}
         numberOfLines={4}
         style={[styles.input, { height: hp(20), textAlignVertical: "top" }]}
       />
+      <TextInput
+        placeholder="Instructions"
+        value={instructions}
+        onChangeText={setInstructions}
+        multiline={true}
+        numberOfLines={4}
+        style={[styles.input, { height: hp(20), textAlignVertical: "top" }]}
+      />
+
       <TouchableOpacity onPress={saverecipe} style={styles.saveButton}>
         <Text style={styles.saveButtonText}>Save recipe</Text>
       </TouchableOpacity>
